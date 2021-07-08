@@ -15,12 +15,12 @@ import javax.xml.ws.Service;
 import java.net.URL;
 
 @Component(value = "OcsSupportControllerImplService")
-@WebService
+@WebService(targetNamespace = "http://interf.soap.ins.telsoft/")
 public class OcsSupportControllerImplService{
 
     @WebMethod(operationName = "Login")
-    @RequestWrapper(localName = "LoginRequest", targetNamespace = "vnpt-technology.vn", className = "vn.neo.wstemplate.LoginRequest")
-    @ResponseWrapper(localName = "LoginResponse", targetNamespace = "vnpt-technology.vn", className = "vn.neo.request.LoginResponse")
+    @RequestWrapper(localName = "LoginRequest", targetNamespace = "http://interf.soap.ins.telsoft/", className = "vn.neo.wstemplate.LoginRequest")
+    @ResponseWrapper(localName = "LoginResponse", targetNamespace = "http://interf.soap.ins.telsoft/", className = "vn.neo.request.LoginResponse")
     public void login(
             @WebParam(name = "Username", targetNamespace = "")
                     String username,
@@ -42,8 +42,8 @@ public class OcsSupportControllerImplService{
     }
 
     @WebMethod(operationName = "QuerySubscriberInfo")
-    @RequestWrapper(localName = "QuerySubscriberInfoRequest", targetNamespace = "vnpt-technology.vn", className = "vn.neo.wstemplate.QuerySubscriberInfoRequest")
-    @ResponseWrapper(localName = "QuerySubscriberInfoResponse", targetNamespace = "vnpt-technology.vn", className = "vn.neo.request.QuerySubscriberInfoResponse")
+    @RequestWrapper(localName = "QuerySubscriberInfoRequest", targetNamespace = "http://interf.soap.ins.telsoft/", className = "vn.neo.wstemplate.QuerySubscriberInfoRequest")
+    @ResponseWrapper(localName = "QuerySubscriberInfoResponse", targetNamespace = "http://interf.soap.ins.telsoft/", className = "vn.neo.request.QuerySubscriberInfoResponse")
     public void querySubscriberInfo(
             @WebParam(name = "SessionID", targetNamespace = "", mode = WebParam.Mode.INOUT)
                     Holder<String> sessionID,
@@ -66,6 +66,15 @@ public class OcsSupportControllerImplService{
         transactionID.value = "6653535";
         responseStatus.value = "343434";
         description.value = "23424234";
+    }
+
+    @WebMethod(operationName = "unRegisterSubsService")
+    @RequestWrapper(localName = "unRegisterSubsService", targetNamespace = "http://interf.soap.ins.telsoft/", className = "vn.neo.wstemplate.UnRegisterSubsService")
+    public String unRegisterSubsService(
+            @WebParam(name = "Isdn", targetNamespace = "", mode = WebParam.Mode.IN)
+                    String isdn
+    ) {
+        return "YOUR ISDN IS: " + isdn;
     }
 
     protected void alterSoapEnvelope(SaajSoapMessage soapResponse) {
